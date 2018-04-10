@@ -66,7 +66,7 @@
                  "-inc"   (number-to-string (or step xbacklight-step))
                  "-time"  (number-to-string xbacklight-time)
                  "-steps" (number-to-string xbacklight-steps))
-  (message "Screen brightness: %s" (xbacklight-get)))
+  (message "Screen brightness: %d%%" (xbacklight-get)))
 
 ;;;###autoload
 (defun xbacklight-decrease (&optional step)
@@ -76,7 +76,7 @@
                  "-dec"   (number-to-string (or step xbacklight-step))
                  "-time"  (number-to-string xbacklight-time)
                  "-steps" (number-to-string xbacklight-steps))
-  (message "Screen brightness: %s" (xbacklight-get)))
+  (message "Screen brightness: %d%%" (xbacklight-get)))
 
 (provide 'xbacklight)
 ;;; xbacklight.el ends here
