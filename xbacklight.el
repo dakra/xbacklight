@@ -44,23 +44,20 @@
 
 (defcustom xbacklight-path (executable-find "xbacklight")
   "Path to `xbacklight' executable."
-  :type 'string
-  :group 'xbacklight)
+  :type 'string)
 
 (defcustom xbacklight-step 10
   "In what step amounts in % should the brightness get de-/increased."
-  :type 'integer
-  :group 'xbacklight)
+  :type 'integer)
 
 (defcustom xbacklight-steps 20
   "Number of steps to take while fading."
-  :type 'integer
-  :group 'xbacklight)
+  :type 'integer)
 
 (defcustom xbacklight-time 200
   "Length of time to spend fading the backlight between old and new value."
-  :type 'integer
-  :group 'xbacklight)
+  :type 'integer)
+
 
 (defun xbacklight-get ()
   "Get screen brightness."
