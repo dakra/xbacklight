@@ -61,9 +61,14 @@
 
 (defun xbacklight-get ()
   "Get screen brightness."
-  (interactive)
   (string-to-number
    (shell-command-to-string (format "%s -get" xbacklight-path))))
+
+;;;###autoload
+(defun xbacklight-show ()
+  "Show backlight brightness in the message buffer."
+  (interactive)
+  (message "Screen brightness: %d%%" (xbacklight-get)))
 
 ;;;###autoload
 (defun xbacklight-increase (&optional step)
@@ -73,7 +78,7 @@
                  "-inc"   (number-to-string (or step xbacklight-step))
                  "-time"  (number-to-string xbacklight-time)
                  "-steps" (number-to-string xbacklight-steps))
-  (message "Screen brightness: %d%%" (xbacklight-get)))
+  (xbacklight-show))
 
 ;;;###autoload
 (defun xbacklight-decrease (&optional step)
@@ -83,7 +88,7 @@
                  "-dec"   (number-to-string (or step xbacklight-step))
                  "-time"  (number-to-string xbacklight-time)
                  "-steps" (number-to-string xbacklight-steps))
-  (message "Screen brightness: %d%%" (xbacklight-get)))
+  (xbacklight-show))
 
 (provide 'xbacklight)
 ;;; xbacklight.el ends here
