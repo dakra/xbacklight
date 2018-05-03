@@ -65,30 +65,38 @@
    (shell-command-to-string (format "%s -get" xbacklight-path))))
 
 ;;;###autoload
-(defun xbacklight-show ()
-  "Show backlight brightness in the message buffer."
+(defun xbacklight-show (&optional delta)
+  "Show backlight brightness in the message buffer.
+When DELTA is non-nil, add it to the actual brightness level.  This way
+you can add/subtract your `xbacklight-step' value to get the end brightness
+before calling `xbacklight' and having to wait for `xbacklight-time' ms."
   (interactive)
-  (message "Screen brightness: %d%%" (xbacklight-get)))
+  (let ((brightness (+ (xbacklight-get) (or delta 0))))
+    (when (< brightness 0) (setq brightness 0))
+    (when (> brightness 100) (setq brightness 100))
+    (message "Screen brightness: %d%%" brightness)))
 
 ;;;###autoload
 (defun xbacklight-increase (&optional step)
   "Increase the brightness by STEP."
   (interactive "P")
-  (start-process "xbacklight" nil xbacklight-path
-                 "-inc"   (number-to-string (or step xbacklight-step))
-                 "-time"  (number-to-string xbacklight-time)
-                 "-steps" (number-to-string xbacklight-steps))
-  (xbacklight-show))
+  (let ((step (or step xbacklight-step)))
+    (xbacklight-show step)
+    (start-process "xbacklight" nil xbacklight-path
+                   "-inc"   (number-to-string step)
+                   "-time"  (number-to-string xbacklight-time)
+                   "-steps" (number-to-string xbacklight-steps))))
 
 ;;;###autoload
 (defun xbacklight-decrease (&optional step)
   "Decrease the brightness by STEP."
   (interactive "P")
-  (start-process "xbacklight" nil xbacklight-path
-                 "-dec"   (number-to-string (or step xbacklight-step))
-                 "-time"  (number-to-string xbacklight-time)
-                 "-steps" (number-to-string xbacklight-steps))
-  (xbacklight-show))
+  (let ((step (or step xbacklight-step)))
+    (xbacklight-show (- step))
+    (start-process "xbacklight" nil xbacklight-path
+                   "-dec"   (number-to-string step)
+                   "-time"  (number-to-string xbacklight-time)
+                   "-steps" (number-to-string xbacklight-steps))))
 
 (provide 'xbacklight)
 ;;; xbacklight.el ends here
