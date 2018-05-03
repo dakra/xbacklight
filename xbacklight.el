@@ -50,11 +50,11 @@
   "In what step amounts in % should the brightness get de-/increased."
   :type 'integer)
 
-(defcustom xbacklight-steps 20
+(defcustom xbacklight-steps 10
   "Number of steps to take while fading."
   :type 'integer)
 
-(defcustom xbacklight-time 200
+(defcustom xbacklight-time 100
   "Length of time to spend fading the backlight between old and new value."
   :type 'integer)
 
