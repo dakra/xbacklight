@@ -1,6 +1,6 @@
 ;;; xbacklight.el --- Adjust screen brightness with xbacklight   -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018  Daniel Kraus
+;; Copyright (C) 2018-2020  Daniel Kraus
 
 ;; Author: Daniel Kraus <daniel@kraus.my>
 ;; Version: 0.1
